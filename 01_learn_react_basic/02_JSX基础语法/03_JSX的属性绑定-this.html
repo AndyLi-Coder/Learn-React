@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+
+      // 1.创建组件
+      class App extends React.Component {
+        constructor() {
+          super()
+          this.state = {
+            counter:100
+          }
+          this.btnClick1 = this.btnClick1.bind(this)
+        }
+        btnClick1() {
+          console.log('btnClick1',this);
+          this.setState({
+            counter: this.state.counter + 100
+          })
+        }
+        btnClick2 = () => {
+          console.log('btnClick2',this)
+          this.setState({counter:1000})
+        }
+        btnClick3() {
+          console.log('btnClick3',this)
+          this.setState({counter:999})
+        }
+        render() {
+          const { counter } = this.state
+          return(
+            <div>
+              {/* this的三种绑定方式 */}
+
+              {/* 1.通过bind绑定 */}
+              <button onClick={this.btnClick1}>按钮1</button>
+
+              {/* 2.通过es6的class fields绑定 */}
+              <button onClick={this.btnClick2}>按钮2</button>
+
+              {/* 3.直接传入一个箭头函数 */}
+              <button onClick={() => this.btnClick3()}>按钮3</button>
+
+              <h2>当前计数：{ counter }</h2>
+            </div>
+          )
+        }
+      }
+
+      // 2.渲染组件
+      const root =  ReactDOM.createRoot(document.querySelector("#root"))
+      root.render(<App/>)
+
+
+    </script>
+
+  </body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+
+      // 1.创建组件
+      class App extends React.Component {
+        constructor() {
+          super()
+          this.state = {
+            title:"Hello World",
+            href:"https://www.baidu.com",
+            isActive:true,
+            styleObject:{
+              color:'red',
+              fontSize:'30px'
+            }
+          }
+        }
+        render() {
+          const { title,href,isActive,styleObject } = this.state
+          // 1.字符串模板绑定
+          const className = `abc cba ${isActive? 'nba':''}`
+          // 2.通过数组进行绑定
+          const classArray = ['abc','cba']
+          if(isActive) classArray.push('nba')
+          return(
+            <div>
+              {/* 基本属性的绑定 */}
+              <h2 title={title}>哈哈哈哈</h2>
+              <a href={href}>百度一下</a>
+              {/* 类的绑定 */}
+              <h2 className={className}>hhh</h2>
+              <h2 className={classArray.join(" ")}>hhh</h2>
+              {/* style的绑定 */}
+              <h2 style={styleObject}>绑定style</h2>
+            </div> 
+          )
+        }
+      }
+
+      // 2.渲染组件
+      const root =  ReactDOM.createRoot(document.querySelector("#root"))
+      root.render(<App/>)
+
+
+    </script>
+
+  </body>
+
+</html>

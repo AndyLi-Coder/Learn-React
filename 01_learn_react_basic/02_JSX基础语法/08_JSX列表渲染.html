@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      .item {
+        border: 1px solid orange;
+        padding: 10px 10px;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+
+      // 1.创建组件
+      class App extends React.Component {
+        constructor() {
+          super()
+          this.state = {
+            students:[
+              {id:1,name:'why',score:80},
+              {id:2,name:'yao',score:90},
+              {id:3,name:'kobe',score:120},
+              {id:4,name:'curry',score:180},
+              {id:5,name:'james',score:200},
+            ]
+          }
+        }
+        render() {
+          const { students } = this.state
+          return(
+            <div>
+              <h2>学生成绩表：</h2>
+              <div className="list">
+                {
+                  students.filter(item => item.score > 100).slice(0,2).map(item => {
+                    return(
+                      <div className="item" key={item.id}>
+                        <h3>{item.id}</h3>
+                        <h3>{item.name}</h3>
+                        <h2>{item.score}</h2>
+                      </div>
+                    )
+                  })
+                }
+              </div>
+            </div>
+          )
+        }
+      }
+
+      // 2.渲染组件
+      const root =  ReactDOM.createRoot(document.querySelector("#root"))
+      root.render(<App/>)
+
+
+    </script>
+
+  </body>
+
+</html>

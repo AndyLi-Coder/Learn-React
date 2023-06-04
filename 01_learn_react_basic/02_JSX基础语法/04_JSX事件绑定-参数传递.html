@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+
+      // 1.创建组件
+      class App extends React.Component {
+        constructor() {
+          super()
+          this.state = {
+            message:"Hello World"
+          }
+        }
+        btnClick(event,name,age) {
+          console.log(this,'this')
+          console.log(event,'event')
+          console.log(name,age,'name,age')
+        }
+        render() {
+          const { message } = this.state
+          return(
+            <div>
+              <h2>{ message }</h2>
+              {/* 1.event 参数传递 */}
+              <button onClick={this.btnClick.bind(this)}>按钮1</button>
+              <button onClick={(event) => this.btnClick(event)}>按钮2</button>
+              {/* 2.额外的参数传递*/}
+              {/* 不推荐使用bind传递额外的参数 */}
+              <button onClick={this.btnClick.bind(this,'kobe',30)}>按钮3</button>
+              {/* 推荐使用箭头函数传递额外的参数 */}
+              <button onClick={(event) => this.btnClick(event,'kobe',30)}>按钮4</button>
+            </div>
+          )
+        }
+      }
+
+      // 2.渲染组件
+      const root =  ReactDOM.createRoot(document.querySelector("#root"))
+      root.render(<App/>)
+
+
+    </script>
+
+  </body>
+
+</html>

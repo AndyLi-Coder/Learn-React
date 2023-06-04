@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+ 
+      // 1.创建组件
+      class App extends React.Component {
+        constructor() {
+          super()
+          this.state = {
+
+            isReady:true,
+            friend:{
+              name:'kobe',
+              desc:'凌晨四点钟的太阳'
+            }
+          }
+        }
+        render() {
+          const { isReady,friend } = this.state
+
+          let showElement = null
+          if(isReady) {
+            showElement = <h2>即将比赛</h2>
+          }else {
+            showElement = <h2>比赛结束</h2>
+          }
+
+          return(
+            <div>
+              {/* 1.根据条件给变量赋值不同的内容 */}
+              <div>{showElement}</div>
+
+              {/* 2.使用三元运算符 */}
+              <div>{isReady? <button>开始</button> : <button>结束</button>}</div>
+
+              {/* 3.&& 使用逻辑与进行判断 */}
+              <div>{friend && <div>{friend.name + ' ' + friend.desc}</div>}</div>
+            </div>
+          )
+        }
+      } 
+
+      // 2.渲染组件
+      const root =  ReactDOM.createRoot(document.querySelector("#root"))
+      root.render(<App/>)
+
+
+    </script>
+
+  </body>
+
+</html>
